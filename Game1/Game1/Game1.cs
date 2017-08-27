@@ -16,6 +16,9 @@ namespace Game1
 		private Texture2D shuttle;
 		private Texture2D earth;
 
+		private SpriteFont scoreFont;
+		private int score = 0;
+
 		public Game1()
 		{
 			graphics = new GraphicsDeviceManager(this);
@@ -41,7 +44,11 @@ namespace Game1
 		{
 			spriteBatch = new SpriteBatch(GraphicsDevice);
 
-			Texture2D image = Content.Load<Texture2D>("Images/game1background");
+			background = Content.Load<Texture2D>("Images/stars");
+			shuttle = Content.Load<Texture2D>("Images/shuttle");
+			earth = Content.Load<Texture2D>("Images/earth");
+
+			scoreFont = Content.Load<SpriteFont>("Score");
 		}
 
 		/// <summary>
@@ -65,6 +72,8 @@ namespace Game1
 				Exit();
 			}
 
+			score++;
+
 			base.Update(gameTime);
 		}
 
@@ -75,6 +84,16 @@ namespace Game1
 		protected override void Draw(GameTime gameTime)
 		{
 			GraphicsDevice.Clear(Color.CornflowerBlue);
+
+			spriteBatch.Begin();
+			/*
+			spriteBatch.Draw(background, new Rectangle(0, 0, 800, 480), Color.White);
+			spriteBatch.Draw(shuttle, new Vector2(450, 240), Color.White);
+			spriteBatch.Draw(earth, new Vector2(400, 240), Color.White);
+			*/
+
+			spriteBatch.DrawString(scoreFont, "Score: " + score, new Vector2(100, 100), Color.Black);
+			spriteBatch.End();
 
 			base.Draw(gameTime);
 		}
