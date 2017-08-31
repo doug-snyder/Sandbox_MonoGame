@@ -54,6 +54,9 @@ namespace Game1
 		/// and initialize them as well.
 		protected override void Initialize()
 		{
+			var form = (System.Windows.Forms.Form)System.Windows.Forms.Control.FromHandle(this.Window.Handle);
+			form.Location = new System.Drawing.Point(600, 350);
+
 			base.Initialize();
 		}
 
