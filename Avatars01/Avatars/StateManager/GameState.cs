@@ -72,9 +72,13 @@ namespace Avatars.GameStates
 
         public override void Update(GameTime gameTime)
         {
-            foreach (GameComponent component in childComponents)
-                if (component.Enabled)
-                    component.Update(gameTime);
+			foreach (GameComponent component in childComponents)
+			{
+				if (component.Enabled)
+				{
+					component.Update(gameTime);
+				}
+			}
 
             base.Update(gameTime);
         }
@@ -83,17 +87,25 @@ namespace Avatars.GameStates
         {
             base.Draw(gameTime);
 
-            foreach (GameComponent component in childComponents)
-                if (component is DrawableGameComponent && ((DrawableGameComponent)component).Visible)
-                    ((DrawableGameComponent)component).Draw(gameTime);
+			foreach (GameComponent component in childComponents)
+			{
+				if (component is DrawableGameComponent && ((DrawableGameComponent)component).Visible)
+				{
+					((DrawableGameComponent)component).Draw(gameTime);
+				}
+			}
         }
 
         protected internal virtual void StateChanged(object sender, EventArgs e)
         {
-            if (manager.CurrentState == tag)
-                Show();
-            else
-                Hide();
+			if (manager.CurrentState == tag)
+			{
+				Show();
+			}
+			else
+			{
+				Hide();
+			}
         }
 
         public virtual void Show()
@@ -104,8 +116,10 @@ namespace Avatars.GameStates
             foreach (GameComponent component in childComponents)
             {
                 component.Enabled = true;
-                if (component is DrawableGameComponent)
-                    ((DrawableGameComponent)component).Visible = true;
+				if (component is DrawableGameComponent)
+				{
+					((DrawableGameComponent)component).Visible = true;
+				}
             }
         }
 
@@ -117,8 +131,10 @@ namespace Avatars.GameStates
             foreach (GameComponent component in childComponents)
             {
                 component.Enabled = false;
-                if (component is DrawableGameComponent)
-                    ((DrawableGameComponent)component).Visible = false;
+				if (component is DrawableGameComponent)
+				{
+					((DrawableGameComponent)component).Visible = false;
+				}
             }
         }
 
