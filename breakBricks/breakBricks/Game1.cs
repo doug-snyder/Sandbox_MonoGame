@@ -10,6 +10,7 @@ namespace breakBricks
 		SpriteBatch spriteBatch;
 
 		Paddle paddle;
+		Ball ball;
 		Rectangle screenRectangle;
 
 		public Game1()
@@ -22,7 +23,9 @@ namespace breakBricks
 
 		protected override void Initialize()
 		{
-			// TODO: Add your initialization logic here
+			var form = (System.Windows.Forms.Form)System.Windows.Forms.Control.FromHandle(this.Window.Handle);
+			form.Location = new System.Drawing.Point(600, 350);
+
 			base.Initialize();
 		}
 
@@ -32,6 +35,17 @@ namespace breakBricks
 
 			Texture2D tempTexture = Content.Load<Texture2D>("paddle");
 			paddle = new Paddle(tempTexture, screenRectangle);
+
+			tempTexture = Content.Load<Texture2D>("ball");
+			ball = new Ball(tempTexture, screenRectangle);
+
+			StartGame();
+		}
+
+		private void StartGame()
+		{
+			paddle.SetInStartPosition();
+			ball.SetInStartPosition(paddle.GetBounds());
 		}
 
 		protected override void UnloadContent() {}
@@ -43,7 +57,15 @@ namespace breakBricks
 				Exit();
 			}
 
-			// TODO: Add your update logic here
+			paddle.Update();
+			ball.Update();
+
+			ball.PaddleCollision(paddle.GetBounds());
+
+			if(ball.OffBottom())
+			{
+				StartGame();
+			}
 
 			base.Update(gameTime);
 		}
@@ -52,7 +74,10 @@ namespace breakBricks
 		{
 			GraphicsDevice.Clear(Color.CornflowerBlue);
 
-			// TODO: Add your drawing code here
+			spriteBatch.Begin();
+			paddle.Draw(spriteBatch);
+			ball.Draw(spriteBatch);
+			spriteBatch.End();
 
 			base.Draw(gameTime);
 		}

@@ -34,10 +34,11 @@ namespace breakBricks
 		{
 			motion = Vector2.Zero;
 
-			keyboardState = keyboardState.GetState();
+			keyboardState = Keyboard.GetState();
 			gamePadState = GamePad.GetState(PlayerIndex.One);
 
 			if (keyboardState.IsKeyDown(Keys.Left) ||
+					keyboardState.IsKeyDown(Keys.A) ||
 					gamePadState.IsButtonDown(Buttons.LeftThumbstickLeft) ||
 					gamePadState.IsButtonDown(Buttons.DPadLeft))
 			{
@@ -45,6 +46,7 @@ namespace breakBricks
 			}
 
 			if (keyboardState.IsKeyDown(Keys.Right) ||
+					keyboardState.IsKeyDown(Keys.D) ||
 					gamePadState.IsButtonDown(Buttons.LeftThumbstickRight) ||
 					gamePadState.IsButtonDown(Buttons.DPadRight))
 			{
@@ -71,7 +73,7 @@ namespace breakBricks
 		}
 
 
-		public void SetInStartePosition()
+		public void SetInStartPosition()
 		{
 			position.X = (screenBounds.Width - texture.Width) / 2;
 			position.Y = screenBounds.Height - texture.Height - 5;
