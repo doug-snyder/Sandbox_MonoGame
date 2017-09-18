@@ -10,7 +10,6 @@ namespace breakBricks
 {
 	class Ball
 	{
-
 		Vector2 motion;
 		Vector2 position;
 		float ballSpeed = 4;

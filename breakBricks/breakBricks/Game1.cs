@@ -13,10 +13,18 @@ namespace breakBricks
 		Ball ball;
 		Rectangle screenRectangle;
 
+		int bricksWide = 10;
+		int bricksHigh = 5;
+		Texture2D brickImage;
+		Brick[,] bricks;
+
 		public Game1()
 		{
 			graphics = new GraphicsDeviceManager(this);
 			Content.RootDirectory = "Content";
+
+			graphics.PreferredBackBufferWidth = 750;
+			graphics.PreferredBackBufferHeight = 600;
 
 			screenRectangle = new Rectangle(0, 0, graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
 		}
@@ -39,6 +47,8 @@ namespace breakBricks
 			tempTexture = Content.Load<Texture2D>("ball");
 			ball = new Ball(tempTexture, screenRectangle);
 
+			brickImage = Content.Load<Texture2D>("brick");
+
 			StartGame();
 		}
 
@@ -46,6 +56,43 @@ namespace breakBricks
 		{
 			paddle.SetInStartPosition();
 			ball.SetInStartPosition(paddle.GetBounds());
+
+			bricks = new Brick[bricksWide, bricksHigh];
+
+			for(int y = 0; y < bricksHigh; y++)
+			{
+				Color tint = Color.White;
+				switch(y)
+				{
+					case 0:
+						tint = Color.Blue;
+						break;
+					case 1:
+						tint = Color.Red;
+						break;
+					case 2:
+						tint = Color.Green;
+						break;
+					case 3:
+						tint = Color.Yellow;
+						break;
+					case 4:
+						tint = Color.Purple;
+						break;
+				}
+
+				for(int x = 0; x < bricksWide; x++)
+				{
+					bricks[x, y] = new Brick(
+						brickImage,
+						new Rectangle(
+							x * brickImage.Width,
+							y * brickImage.Height,
+							brickImage.Width,
+							brickImage.Height),
+						tint);
+				}
+			}
 		}
 
 		protected override void UnloadContent() {}
