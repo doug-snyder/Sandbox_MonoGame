@@ -122,8 +122,15 @@ namespace breakBricks
 			GraphicsDevice.Clear(Color.CornflowerBlue);
 
 			spriteBatch.Begin();
+
 			paddle.Draw(spriteBatch);
 			ball.Draw(spriteBatch);
+
+			foreach(Brick brick in bricks)
+			{
+				brick.Draw(spriteBatch);
+			}
+
 			spriteBatch.End();
 
 			base.Draw(gameTime);
