@@ -30,7 +30,11 @@ namespace breakBricks
 
 		public void CheckCollision(Ball ball)
 		{
-
+			if(alive && ball.Bounds.Intersects(location))
+			{
+				alive = false;
+				ball.Deflection(this);
+			}
 		}
 
 		public void Draw(SpriteBatch spriteBatch)

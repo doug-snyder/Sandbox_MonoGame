@@ -12,20 +12,37 @@ namespace breakBricks
 	{
 		Vector2 motion;
 		Vector2 position;
+		Rectangle bounds;
+		bool collided;
+		const float ballStartSpeed = 8f;
 		float ballSpeed = 4;
 
 		Texture2D texture;
 		Rectangle screenBounds;
 
+		public Rectangle Bounds
+		{
+			get
+			{
+				bounds.X = (int)position.X;
+				bounds.Y = (int)position.Y;
+				return bounds;
+			}
+		}
+
 		public Ball(Texture2D texture, Rectangle screenBounds)
 		{
+			bounds = new Rectangle(0, 0, texture.Width, texture.Height);
 			this.texture = texture;
 			this.screenBounds = screenBounds;
 		}
 
 		public void Update()
 		{
+			collided = false;
 			position += motion * ballSpeed;
+			ballSpeed += 0.01f;
+
 			CheckWallCollision();
 		}
 
@@ -52,7 +69,13 @@ namespace breakBricks
 
 		public void SetInStartPosition(Rectangle paddleLocation)
 		{
-			motion = new Vector2(1, -1);
+			Random rand = new Random();
+
+			motion = new Vector2(rand.Next(2, 6), -rand.Next(2, 6));
+			motion.Normalize();
+
+			ballSpeed = ballStartSpeed;
+
 			position.Y = paddleLocation.Y - texture.Height;
 			position.X = paddleLocation.X + (paddleLocation.Width - texture.Width) / 2;
 		}
@@ -74,6 +97,15 @@ namespace breakBricks
 			{
 				position.Y = paddleLocation.Y - texture.Height;
 				motion.Y *= -1;
+			}
+		}
+
+		public void Deflection(Brick brick)
+		{
+			if (!collided)
+			{
+				motion.Y *= -1;
+				collided = true;
 			}
 		}
 

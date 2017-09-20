@@ -107,6 +107,11 @@ namespace breakBricks
 			paddle.Update();
 			ball.Update();
 
+			foreach(Brick brick in bricks)
+			{
+				brick.CheckCollision(ball);
+			}
+
 			ball.PaddleCollision(paddle.GetBounds());
 
 			if(ball.OffBottom())
