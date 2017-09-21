@@ -2,14 +2,17 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
-namespace SummonerTale
+namespace summonerTale
 {
-	public class SummonerTale : Game
+	/// <summary>
+	/// This is the main type for your game.
+	/// </summary>
+	public class Game1 : Game
 	{
 		GraphicsDeviceManager graphics;
 		SpriteBatch spriteBatch;
 
-		public SummonerTale()
+		public Game1()
 		{
 			graphics = new GraphicsDeviceManager(this);
 			Content.RootDirectory = "Content";
@@ -27,7 +30,6 @@ namespace SummonerTale
 
 		protected override void UnloadContent()
 		{
-
 		}
 
 		protected override void Update(GameTime gameTime)
