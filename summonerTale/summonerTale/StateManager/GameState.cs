@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 
-namespace Avatars.StateManager
+namespace summonerTale.StateManager
 {
 	public interface IGameState
 	{
