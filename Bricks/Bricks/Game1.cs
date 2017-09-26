@@ -8,6 +8,7 @@ namespace Bricks
 	{
 		GraphicsDeviceManager graphics;
 		SpriteBatch spriteBatch;
+		GameContent gameContent;
 
 		public Game1()
 		{
@@ -25,10 +26,9 @@ namespace Bricks
 
 		protected override void LoadContent()
 		{
-			// Create a new SpriteBatch, which can be used to draw textures.
 			spriteBatch = new SpriteBatch(GraphicsDevice);
 
-			// TODO: use this.Content to load your game content here
+			gameContent = new GameContent(Content);
 		}
 
 		protected override void UnloadContent()
