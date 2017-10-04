@@ -10,6 +10,12 @@ namespace Bricks
 		SpriteBatch spriteBatch;
 		GameContent gameContent;
 
+		private Paddle paddle;
+		private Wall wall;
+		private int screenWidth = 0;
+		private int screenHeight = 0;
+
+
 		public Game1()
 		{
 			graphics = new GraphicsDeviceManager(this);
@@ -18,23 +24,44 @@ namespace Bricks
 
 		protected override void Initialize()
 		{
-			var form = (System.Windows.Forms.Form)System.Windows.Forms.Control.FromHandle(this.Window.Handle);
-			form.Location = new System.Drawing.Point(450, 250);
+			//var form = (System.Windows.Forms.Form)System.Windows.Forms.Control.FromHandle(this.Window.Handle);
+			//form.Location = new System.Drawing.Point(450, 250);
 
 			base.Initialize();
 		}
 
 		protected override void LoadContent()
 		{
+			// Create new SpriteBatch for texture drawing.
 			spriteBatch = new SpriteBatch(GraphicsDevice);
+
+			// TODO: this.Content for loading game content
+			gameContent = new GameContent(Content);
+			screenWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
+			screenHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
+
+			if (screenWidth >= 502)
+			{
+				screenWidth = 502;
+			}
+			if (screenHeight >= 700)
+			{
+				screenHeight = 700;
+			}
+			graphics.PreferredBackBufferWidth = screenWidth;
+			graphics.PreferredBackBufferHeight = screenHeight;
+			graphics.ApplyChanges();
+
+			// Game Objects
+			int paddleX = (screenWidth - gameContent.ImgPaddle.Width) / 2;					// center paddle
+			int paddleY = screenHeight - 100;												// paddle 100 pixels from bottom
+			paddle = new Paddle(paddleX, paddleY, screenWidth, spriteBatch, gameContent);   // create paddle
+			wall = new Wall(1, 50, spriteBatch, gameContent);								// create wall
 
 			gameContent = new GameContent(Content);
 		}
 
-		protected override void UnloadContent()
-		{
-			// TODO: Unload any non ContentManager content here
-		}
+		protected override void UnloadContent(){}
 
 		protected override void Update(GameTime gameTime)
 		{
@@ -43,8 +70,6 @@ namespace Bricks
 				Exit();
 			}
 
-			// TODO: Add your update logic here
-
 			base.Update(gameTime);
 		}
 
@@ -52,7 +77,10 @@ namespace Bricks
 		{
 			GraphicsDevice.Clear(Color.CornflowerBlue);
 
-			// TODO: Add your drawing code here
+			spriteBatch.Begin();
+			paddle.Draw();
+			wall.Draw();
+			spriteBatch.End();
 
 			base.Draw(gameTime);
 		}
