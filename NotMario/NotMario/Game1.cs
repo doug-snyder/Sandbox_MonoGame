@@ -10,14 +10,16 @@ namespace NotMario
 	{
 		GraphicsDeviceManager graphics;
 		SpriteBatch spriteBatch;
+		ScreenManager screenManager;
 
 
 		public Game1()
 		{
 			graphics = new GraphicsDeviceManager(this);
+			graphics.PreferredBackBufferWidth = 1280;
+			graphics.PreferredBackBufferHeight = 720;
+			graphics.ApplyChanges();
 			Content.RootDirectory = "Content";
-
-			Content_Manager.GetInstance();
 		}
 
 		protected override void Initialize()
@@ -33,6 +35,8 @@ namespace NotMario
 			spriteBatch = new SpriteBatch(GraphicsDevice);
 
 			Content_Manager.GetInstance().LoadTextures(Content);
+
+			screenManager = new ScreenManager(GraphicsDevice.Viewport.Bounds);
 		}
 
 		protected override void UnloadContent()
@@ -47,7 +51,6 @@ namespace NotMario
 				Exit();
 			}
 
-
 			base.Update(gameTime);
 		}
 
@@ -57,11 +60,12 @@ namespace NotMario
 
 			spriteBatch.Begin();
 
-			spriteBatch.Draw(Content_Manager.GetInstance().Textures["mario1"], new Vector2(100, 100), Color.White);
+			screenManager.Draw(spriteBatch);
 
 			spriteBatch.End();
 
 			base.Draw(gameTime);
 		}
+
 	}
 }

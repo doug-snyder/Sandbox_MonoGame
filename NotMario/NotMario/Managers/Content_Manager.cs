@@ -15,7 +15,7 @@ namespace NotMario.Managers
 
 		public Dictionary<String, Texture2D> Textures;
 
-		
+
 		private Content_Manager()
 		{
 			Textures = new Dictionary<String, Texture2D>();
@@ -33,7 +33,11 @@ namespace NotMario.Managers
 		public void LoadTextures(ContentManager content)
 		{
 			CM = content;
-			AddTexture("mario sprite", "mario1");
+			AddTexture("mario sprite");
+			AddTexture("menu screen");
+			AddTexture("brick");
+			AddTexture("ground");
+			AddTexture("scenery hill");
 		}
 
 		public void AddTexture(String file, String name = "")

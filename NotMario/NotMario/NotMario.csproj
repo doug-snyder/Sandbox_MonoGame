@@ -43,8 +43,13 @@
   <ItemGroup>
     <Compile Include="Game1.cs" />
     <Compile Include="Managers\Content_Manager.cs" />
+    <Compile Include="Managers\ScreenManager.cs" />
+    <Compile Include="Managers\TileManager.cs" />
+    <Compile Include="Screens\MenuScreen.cs" />
+    <Compile Include="Screens\Screen.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Screens\TempScreen.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">
