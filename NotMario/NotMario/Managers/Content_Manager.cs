@@ -34,7 +34,7 @@ namespace NotMario.Managers
 		{
 			CM = content;
 			AddTexture("mario sprite");
-			AddTexture("menu screen");
+			AddTexture("menu_screen");
 			AddTexture("brick");
 			AddTexture("ground");
 			AddTexture("scenery hill");

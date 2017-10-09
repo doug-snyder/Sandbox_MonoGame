@@ -59,9 +59,7 @@ namespace NotMario
 			GraphicsDevice.Clear(Color.CornflowerBlue);
 
 			spriteBatch.Begin();
-
 			screenManager.Draw(spriteBatch);
-
 			spriteBatch.End();
 
 			base.Draw(gameTime);

@@ -7,19 +7,21 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 using NotMario.Managers;
+using NotMario.Helper_Classes;
 
 namespace NotMario.Screens
 {
 	class MenuScreen : Screen
 	{
-		Texture2D MenuLogo;
+		Sprite MenuLogo;
 		TileManager tileManager;
 
 
 		public MenuScreen(Rectangle screenSize)
 			: base(screenSize)
 		{
-			MenuLogo = Content_Manager.GetInstance().Textures["menu screen"];
+			Texture2D menuLogoTexture = Content_Manager.GetInstance().Textures["menu_screen"];
+			MenuLogo = new Sprite(menuLogoTexture, new Vector2(ScreenSize.Width / 2 - menuLogoTexture.Width / 2, 75));
 			tileManager = new TileManager();
 
 			tileManager.AddTile(Content_Manager.GetInstance().Textures["scenery hill"], new Vector2(2, ScreenSize.Height / 32 - 3));
@@ -36,7 +38,7 @@ namespace NotMario.Screens
 
 		public override void Draw(SpriteBatch spriteBatch)
 		{
-			spriteBatch.Draw(MenuLogo, new Vector2(ScreenSize.Width / 2 - MenuLogo.Width / 2, 75), Color.White);
+			MenuLogo.Draw(spriteBatch);
 			tileManager.Draw(spriteBatch);
 		}
 

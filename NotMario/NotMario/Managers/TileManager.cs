@@ -28,7 +28,7 @@ namespace NotMario.Managers
 		{
 			foreach (Tile tile in tiles)
 			{
-				spriteBatch.Draw(tile.texture, new Vector2(tile.position.X * 32, tile.position.Y * 32) + tile.offset, Color.White);
+				spriteBatch.Draw(tile._texture, new Vector2(tile._position.X * 32, tile._position.Y * 32) + tile._offset, Color.White);
 			}
 		}
 
@@ -36,16 +36,16 @@ namespace NotMario.Managers
 
 	class Tile
 	{
-		public Texture2D texture;
-		public Vector2 position;
-		public Vector2 offset;
+		public Texture2D _texture;
+		public Vector2 _position;
+		public Vector2 _offset;
 
 
 		public Tile(Texture2D texture, Vector2 position, Vector2? offset)
 		{
-			this.texture = texture;
-			this.position = position;
-			this.offset = (offset == null ? new Vector2(0, 0) : offset.Value);
+			_texture = texture;
+			_position = position;
+			_offset = (offset == null ? new Vector2(0, 0) : offset.Value);
 		}
 	}
 }

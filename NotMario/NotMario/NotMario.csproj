@@ -42,6 +42,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Game1.cs" />
+    <Compile Include="Helper Classes\Sprite.cs" />
     <Compile Include="Managers\Content_Manager.cs" />
     <Compile Include="Managers\ScreenManager.cs" />
     <Compile Include="Managers\TileManager.cs" />
