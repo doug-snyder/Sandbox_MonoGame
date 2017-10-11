@@ -56,6 +56,12 @@
     <Reference Include="MonoGame.Extended, Version=0.6.568.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MonoGame.Extended.0.6.568\lib\portable-net45+win8+wpa81\MonoGame.Extended.dll</HintPath>
     </Reference>
+    <Reference Include="MonoGame.Extended.Animations, Version=0.6.568.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MonoGame.Extended.Animations.0.6.568\lib\portable-net45+win8+wpa81\MonoGame.Extended.Animations.dll</HintPath>
+    </Reference>
+    <Reference Include="MonoGame.Extended.Graphics, Version=0.6.568.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MonoGame.Extended.Graphics.0.6.568\lib\portable-net45+win8+wpa81\MonoGame.Extended.Graphics.dll</HintPath>
+    </Reference>
     <Reference Include="MonoGame.Framework">
       <HintPath>$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\Windows\MonoGame.Framework.dll</HintPath>
     </Reference>
