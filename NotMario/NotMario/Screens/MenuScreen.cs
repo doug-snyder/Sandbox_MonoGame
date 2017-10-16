@@ -7,7 +7,6 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 using NotMario.Managers;
-using NotMario.Helper_Classes;
 
 namespace NotMario.Screens
 {
@@ -34,6 +33,8 @@ namespace NotMario.Screens
 			}
 
 			tileManager.AddTile(Content_Manager.GetInstance().Textures["mario sprite"], new Vector2(4, ScreenSize.Height / 32 - 3), new Vector2(0, 21));
+
+			tileManager.AddTile(Content_Manager.GetInstance().Textures["coinsAnim"], new Vector2(12, 1));
 		}
 
 		public override void Draw(SpriteBatch spriteBatch)

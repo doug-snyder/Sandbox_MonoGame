@@ -2,24 +2,21 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
-using NotMario.Managers;
-
-namespace NotMario
+namespace AnimatedSpriteTest
 {
 	public class Game1 : Game
 	{
 		GraphicsDeviceManager graphics;
 		SpriteBatch spriteBatch;
-		ScreenManager screenManager;
-
-		Player player;
-
+		Texture2D spriteSheet;
 
 		public Game1()
 		{
-			graphics = new GraphicsDeviceManager(this);
-			graphics.PreferredBackBufferWidth = 1280;
-			graphics.PreferredBackBufferHeight = 720;
+			graphics = new GraphicsDeviceManager(this)
+			{
+				PreferredBackBufferWidth = 1280,
+				PreferredBackBufferHeight = 720
+			};
 			graphics.ApplyChanges();
 			Content.RootDirectory = "Content";
 		}
@@ -35,18 +32,10 @@ namespace NotMario
 		protected override void LoadContent()
 		{
 			spriteBatch = new SpriteBatch(GraphicsDevice);
-
-			Content_Manager.GetInstance().LoadTextures(Content);
-
-			player = new Player(new Vector2(100, 100));
-
-			screenManager = new ScreenManager(GraphicsDevice.Viewport.Bounds);
+			spriteSheet = Content.Load<Texture2D>("link spritesheet");
 		}
 
-		protected override void UnloadContent()
-		{
-
-		}
+		protected override void UnloadContent(){}
 
 		protected override void Update(GameTime gameTime)
 		{
@@ -55,7 +44,6 @@ namespace NotMario
 				Exit();
 			}
 
-			player.Update();
 			base.Update(gameTime);
 		}
 
@@ -64,8 +52,7 @@ namespace NotMario
 			GraphicsDevice.Clear(Color.CornflowerBlue);
 
 			spriteBatch.Begin();
-			screenManager.Draw(spriteBatch);
-			player.Draw(spriteBatch);
+			spriteBatch.Draw(spriteSheet, Vector2.Zero, null, Color.White, 0, new Vector2(0, 0), 1.0f, SpriteEffects.None, 0);
 			spriteBatch.End();
 
 			base.Draw(gameTime);

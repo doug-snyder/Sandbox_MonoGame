@@ -38,6 +38,7 @@ namespace NotMario.Managers
 			AddTexture("brick");
 			AddTexture("ground");
 			AddTexture("scenery hill");
+			AddTexture("coinsAnim");
 		}
 
 		public void AddTexture(String file, String name = "")
