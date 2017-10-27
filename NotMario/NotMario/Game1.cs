@@ -17,9 +17,11 @@ namespace NotMario
 
 		public Game1()
 		{
-			graphics = new GraphicsDeviceManager(this);
-			graphics.PreferredBackBufferWidth = 1280;
-			graphics.PreferredBackBufferHeight = 720;
+			graphics = new GraphicsDeviceManager(this)
+			{
+				PreferredBackBufferWidth = 1280,
+				PreferredBackBufferHeight = 720
+			};
 			graphics.ApplyChanges();
 			Content.RootDirectory = "Content";
 		}

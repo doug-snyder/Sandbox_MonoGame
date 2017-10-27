@@ -14,6 +14,7 @@ namespace NotMario.Managers
 		ContentManager CM;
 
 		public Dictionary<String, Texture2D> Textures;
+		public Dictionary<String, TextureAtlas> TextureAtlases;
 
 
 		private Content_Manager()
