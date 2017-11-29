@@ -8,16 +8,10 @@ namespace AnimatedSpriteTest
 	{
 		GraphicsDeviceManager graphics;
 		SpriteBatch spriteBatch;
-		Texture2D spriteSheet;
-		Rectangle source;
-		Vector2 position;
-		Vector2 origin;
-		float time;
-		float frameTime = 0.06f;
-		int frameIndex;
-		const int totalFrames = 7;
-		int frameHeight = 96;
-		int frameWidth = 64;
+
+		private Texture2D _texture;
+		private Vector2 _position;
+
 
 		public Game1()
 		{
@@ -35,8 +29,8 @@ namespace AnimatedSpriteTest
 			var form = (System.Windows.Forms.Form)System.Windows.Forms.Control.FromHandle(this.Window.Handle);
 			form.Location = new System.Drawing.Point(450, 250);
 
-			position = new Vector2(this.Window.ClientBounds.Width / 2, this.Window.ClientBounds.Height / 2);
-			origin = new Vector2(frameWidth / 2.0f, frameHeight);
+			//position = new Vector2(this.Window.ClientBounds.Width / 2, this.Window.ClientBounds.Height / 2);
+			//origin = new Vector2(frameWidth / 2.0f, frameHeight);
 
 			base.Initialize();
 		}
@@ -44,16 +38,35 @@ namespace AnimatedSpriteTest
 		protected override void LoadContent()
 		{
 			spriteBatch = new SpriteBatch(GraphicsDevice);
-			spriteSheet = Content.Load<Texture2D>("link spritesheet");
+
+			_texture = Content.Load<Texture2D>("malefighter");
+			_position = new Vector2(250, 250);
 		}
 
 		protected override void UnloadContent(){}
 
 		protected override void Update(GameTime gameTime)
 		{
-			if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+			if (Keyboard.GetState().IsKeyDown(Keys.Escape))
 			{
 				Exit();
+			}
+
+			if (Keyboard.GetState().IsKeyDown(Keys.W))
+			{
+				_position.Y -= 1;
+			}
+			if (Keyboard.GetState().IsKeyDown(Keys.A))
+			{
+				_position.X -= 1;
+			}
+			if (Keyboard.GetState().IsKeyDown(Keys.S))
+			{
+				_position.Y += 1;
+			}
+			if (Keyboard.GetState().IsKeyDown(Keys.D))
+			{
+				_position.X += 1;
 			}
 
 			base.Update(gameTime);
@@ -63,22 +76,8 @@ namespace AnimatedSpriteTest
 		{
 			GraphicsDevice.Clear(Color.CornflowerBlue);
 
-			time += (float)gameTime.ElapsedGameTime.TotalSeconds;
-			while (time > frameTime)
-			{
-				frameIndex++;
-				time = 0f;
-			}
-
-			if (frameIndex > totalFrames)
-			{
-				frameIndex = 0;
-			}
-
-			source = new Rectangle(frameIndex * frameWidth, 96*0, frameWidth, frameHeight);
-
 			spriteBatch.Begin();
-			spriteBatch.Draw(spriteSheet, position, source, Color.White, 0.0f, origin, 1.0f, SpriteEffects.None, 0.0f);
+			spriteBatch.Draw(_texture, _position, Color.White);
 			spriteBatch.End();
 
 			base.Draw(gameTime);
