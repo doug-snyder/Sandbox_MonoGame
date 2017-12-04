@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.Collections.Generic;
 
 namespace AnimatedSpriteTest
 {
@@ -9,8 +10,9 @@ namespace AnimatedSpriteTest
 		GraphicsDeviceManager graphics;
 		SpriteBatch spriteBatch;
 
+		private List<Sprite> _sprites;
+
 		private Texture2D _texture;
-		private Vector2 _position;
 
 
 		public Game1()
@@ -40,7 +42,32 @@ namespace AnimatedSpriteTest
 			spriteBatch = new SpriteBatch(GraphicsDevice);
 
 			_texture = Content.Load<Texture2D>("malefighter");
-			_position = new Vector2(250, 250);
+
+			_sprites = new List<Sprite>()
+			{
+				new Sprite(_texture)
+				{
+					Position = new Vector2(250, 250),
+					Input = new Input()
+					{
+						Up = Keys.W,
+						Down = Keys.S,
+						Left = Keys.A,
+						Right = Keys.D
+					}
+				},
+				new Sprite(_texture)
+				{
+					Position = new Vector2(100, 100),
+					Input = new Input()
+					{
+						Up = Keys.Up,
+						Down = Keys.Down,
+						Left = Keys.Left,
+						Right = Keys.Right
+					}
+				}
+			};
 		}
 
 		protected override void UnloadContent(){}
@@ -52,21 +79,9 @@ namespace AnimatedSpriteTest
 				Exit();
 			}
 
-			if (Keyboard.GetState().IsKeyDown(Keys.W))
+			foreach (Sprite sprite in _sprites)
 			{
-				_position.Y -= 1;
-			}
-			if (Keyboard.GetState().IsKeyDown(Keys.A))
-			{
-				_position.X -= 1;
-			}
-			if (Keyboard.GetState().IsKeyDown(Keys.S))
-			{
-				_position.Y += 1;
-			}
-			if (Keyboard.GetState().IsKeyDown(Keys.D))
-			{
-				_position.X += 1;
+				sprite.Update();
 			}
 
 			base.Update(gameTime);
@@ -77,7 +92,12 @@ namespace AnimatedSpriteTest
 			GraphicsDevice.Clear(Color.CornflowerBlue);
 
 			spriteBatch.Begin();
-			spriteBatch.Draw(_texture, _position, Color.White);
+			
+			foreach (Sprite sprite in _sprites)
+			{
+				sprite.Draw(spriteBatch);
+			}
+
 			spriteBatch.End();
 
 			base.Draw(gameTime);
