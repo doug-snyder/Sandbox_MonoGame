@@ -41,30 +41,21 @@ namespace AnimatedSpriteTest
 		{
 			spriteBatch = new SpriteBatch(GraphicsDevice);
 
-			_texture = Content.Load<Texture2D>("malefighter");
+			_texture = Content.Load<Texture2D>("ship5");
 
 			_sprites = new List<Sprite>()
 			{
 				new Sprite(_texture)
 				{
 					Position = new Vector2(250, 250),
+					Origin = new Vector2(_texture.Width / 2, _texture.Height / 2),
+					RotationalOffset = MathHelper.ToRadians(90),
 					Input = new Input()
 					{
 						Up = Keys.W,
 						Down = Keys.S,
 						Left = Keys.A,
 						Right = Keys.D
-					}
-				},
-				new Sprite(_texture)
-				{
-					Position = new Vector2(100, 100),
-					Input = new Input()
-					{
-						Up = Keys.Up,
-						Down = Keys.Down,
-						Left = Keys.Left,
-						Right = Keys.Right
 					}
 				}
 			};

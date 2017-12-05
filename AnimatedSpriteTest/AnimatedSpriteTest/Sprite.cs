@@ -15,7 +15,13 @@ namespace AnimatedSpriteTest
 
 		public Input Input;
 		public Vector2 Position;
-		public float Speed = 2f;
+		public Vector2 Origin;
+		public float RotationalOffset = 0f;
+		public float Speed = 5f;
+		public float RotationVelocity = 5f;
+		public float LinearVelocity = 10f;
+	
+		private float _rotation;
 
 
 		public Sprite(Texture2D texture)
@@ -25,7 +31,8 @@ namespace AnimatedSpriteTest
 
 		public void Update()
 		{
-			Move();
+			//Move();
+			Rotate();
 		}
 
 		private void Move()
@@ -53,9 +60,37 @@ namespace AnimatedSpriteTest
 			}
 		}
 
+		private void Rotate()
+		{
+			if (Input == null)
+			{
+				return;
+			}
+
+			if (Keyboard.GetState().IsKeyDown(Input.Left))
+			{
+				_rotation -= MathHelper.ToRadians(RotationVelocity);
+			}
+			if (Keyboard.GetState().IsKeyDown(Input.Right))
+			{
+				_rotation += MathHelper.ToRadians(RotationVelocity);
+			}
+
+			Vector2 direction = new Vector2((float)Math.Cos(RotationalOffset - _rotation), -(float)Math.Sin(RotationalOffset - _rotation));
+
+			if (Keyboard.GetState().IsKeyDown(Input.Up))
+			{
+				Position += direction * LinearVelocity;
+			}
+			if (Keyboard.GetState().IsKeyDown(Input.Down))
+			{
+				Position -= direction * LinearVelocity;
+			}
+		}
+
 		public void Draw(SpriteBatch spriteBatch)
 		{
-			spriteBatch.Draw(_texture, Position, Color.White);
+			spriteBatch.Draw(_texture, Position, null, Color.White, _rotation, Origin, 1, SpriteEffects.None, 0f);
 		}
 
 	}
