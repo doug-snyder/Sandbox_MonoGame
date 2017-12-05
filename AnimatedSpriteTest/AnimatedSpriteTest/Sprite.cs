@@ -9,30 +9,36 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace AnimatedSpriteTest
 {
-	class Sprite
+	class Sprite : ICloneable
 	{
-		private Texture2D _texture;
+		protected Texture2D _texture;
+		protected float _rotation;
+		protected KeyboardState _currentKey;
+		protected KeyboardState _previousKey;
 
 		public Input Input;
 		public Vector2 Position;
 		public Vector2 Origin;
+		public Vector2 Direction;
 		public float RotationalOffset = 0f;
-		public float Speed = 5f;
 		public float RotationVelocity = 5f;
 		public float LinearVelocity = 10f;
+		public float LifeSpan = 0f;
+		public bool IsRemoved = false;
+
+		public Sprite Parent;
 	
-		private float _rotation;
-
-
+		
 		public Sprite(Texture2D texture)
 		{
 			_texture = texture;
+			Origin = new Vector2(_texture.Width / 2, _texture.Height / 2);
 		}
 
-		public void Update()
+		public virtual void Update(GameTime gameTime, List<Sprite> sprites)
 		{
 			//Move();
-			Rotate();
+			RotateAndMove();
 		}
 
 		private void Move()
@@ -44,23 +50,23 @@ namespace AnimatedSpriteTest
 
 			if (Keyboard.GetState().IsKeyDown(Input.Up))
 			{
-				Position.Y -= Speed;
+				Position.Y -= LinearVelocity;
 			}
 			if (Keyboard.GetState().IsKeyDown(Input.Left))
 			{
-				Position.X -= Speed;
+				Position.X -= LinearVelocity;
 			}
 			if (Keyboard.GetState().IsKeyDown(Input.Down))
 			{
-				Position.Y += Speed;
+				Position.Y += LinearVelocity;
 			}
 			if (Keyboard.GetState().IsKeyDown(Input.Right))
 			{
-				Position.X += Speed;
+				Position.X += LinearVelocity;
 			}
 		}
 
-		private void Rotate()
+		private void RotateAndMove()
 		{
 			if (Input == null)
 			{
@@ -76,21 +82,26 @@ namespace AnimatedSpriteTest
 				_rotation += MathHelper.ToRadians(RotationVelocity);
 			}
 
-			Vector2 direction = new Vector2((float)Math.Cos(RotationalOffset - _rotation), -(float)Math.Sin(RotationalOffset - _rotation));
+			Direction = new Vector2((float)Math.Cos(RotationalOffset - _rotation), -(float)Math.Sin(RotationalOffset - _rotation));
 
 			if (Keyboard.GetState().IsKeyDown(Input.Up))
 			{
-				Position += direction * LinearVelocity;
+				Position += Direction * LinearVelocity;
 			}
 			if (Keyboard.GetState().IsKeyDown(Input.Down))
 			{
-				Position -= direction * LinearVelocity;
+				Position -= Direction * LinearVelocity;
 			}
 		}
 
 		public void Draw(SpriteBatch spriteBatch)
 		{
-			spriteBatch.Draw(_texture, Position, null, Color.White, _rotation, Origin, 1, SpriteEffects.None, 0f);
+			spriteBatch.Draw(_texture, Position, null, Color.White, _rotation, Origin, 1, SpriteEffects.None, 0);
+		}
+
+		public object Clone()
+		{
+			return this.MemberwiseClone();
 		}
 
 	}

@@ -45,9 +45,10 @@ namespace AnimatedSpriteTest
 
 			_sprites = new List<Sprite>()
 			{
-				new Sprite(_texture)
+				new Ship(_texture)
 				{
 					Position = new Vector2(250, 250),
+					Bullet = new Bullet(Content.Load<Texture2D>("spaceBullet")),
 					Origin = new Vector2(_texture.Width / 2, _texture.Height / 2),
 					RotationalOffset = MathHelper.ToRadians(90),
 					Input = new Input()
@@ -70,17 +71,30 @@ namespace AnimatedSpriteTest
 				Exit();
 			}
 
-			foreach (Sprite sprite in _sprites)
+			foreach (Sprite sprite in _sprites.ToArray())
 			{
-				sprite.Update();
+				sprite.Update(gameTime, _sprites);
 			}
 
 			base.Update(gameTime);
+			PostUpdate();
+		}
+
+		private void PostUpdate()
+		{
+			for (int i = 0; i < _sprites.Count; i++)
+			{
+				if (_sprites[i].IsRemoved)
+				{
+					_sprites.RemoveAt(i);
+					i--;
+				}
+			}
 		}
 
 		protected override void Draw(GameTime gameTime)
 		{
-			GraphicsDevice.Clear(Color.CornflowerBlue);
+			GraphicsDevice.Clear(Color.Black);
 
 			spriteBatch.Begin();
 			
