@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Graphics;
@@ -28,7 +25,6 @@ namespace AnimatedSpriteTest
 
 		public Sprite Parent;
 	
-		
 		public Sprite(Texture2D texture)
 		{
 			_texture = texture;
@@ -37,7 +33,6 @@ namespace AnimatedSpriteTest
 
 		public virtual void Update(GameTime gameTime, List<Sprite> sprites)
 		{
-			//Move();
 			RotateAndMove();
 		}
 
@@ -64,6 +59,11 @@ namespace AnimatedSpriteTest
 			{
 				Position.X += LinearVelocity;
 			}
+		}
+
+		public virtual void RotationAtCreation(Vector2 direction)
+		{
+			_rotation = (float)Math.Atan2(direction.Y, direction.X);
 		}
 
 		private void RotateAndMove()

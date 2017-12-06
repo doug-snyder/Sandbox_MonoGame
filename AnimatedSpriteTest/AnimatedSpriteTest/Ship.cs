@@ -1,11 +1,8 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using System;
 
 namespace AnimatedSpriteTest
 {
@@ -33,6 +30,7 @@ namespace AnimatedSpriteTest
 			Bullet bullet = Bullet.Clone() as Bullet;
 			bullet.Direction = this.Direction;
 			bullet.Position = this.Position;
+			bullet.RotationAtCreation(Direction);
 			bullet.LinearVelocity = this.LinearVelocity * 2;
 			bullet.LifeSpan = 2f;
 			bullet.Parent = this;
