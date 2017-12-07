@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace AnimatedSpriteTest
 {
-	class Sprite : ICloneable
+	public class Sprite : ICloneable
 	{
 		protected Texture2D _texture;
 		protected float _rotation;
@@ -15,8 +15,10 @@ namespace AnimatedSpriteTest
 
 		public Input Input;
 		public Vector2 Position;
+		public Vector2 Velocity;
 		public Vector2 Origin;
 		public Vector2 Direction;
+		public float Speed;
 		public float RotationalOffset = 0f;
 		public float RotationVelocity = 5f;
 		public float LinearVelocity = 10f;
@@ -24,11 +26,19 @@ namespace AnimatedSpriteTest
 		public bool IsRemoved = false;
 
 		public Sprite Parent;
+
+		public Rectangle Rectangle
+		{
+			get
+			{
+				return new Rectangle((int)Position.X, (int)Position.Y, _texture.Width, _texture.Height);
+			}
+		}
 	
 		public Sprite(Texture2D texture)
 		{
 			_texture = texture;
-			Origin = new Vector2(_texture.Width / 2, _texture.Height / 2);
+			//Origin = new Vector2(_texture.Width / 2, _texture.Height / 2);
 		}
 
 		public virtual void Update(GameTime gameTime, List<Sprite> sprites)
@@ -96,7 +106,8 @@ namespace AnimatedSpriteTest
 
 		public void Draw(SpriteBatch spriteBatch)
 		{
-			spriteBatch.Draw(_texture, Position, null, Color.White, _rotation, Origin, 1, SpriteEffects.None, 0);
+			//spriteBatch.Draw(_texture, Position, null, Color.White, _rotation, Origin, 1, SpriteEffects.None, 0);
+			spriteBatch.Draw(_texture, Position, Color.White);
 		}
 
 		public object Clone()

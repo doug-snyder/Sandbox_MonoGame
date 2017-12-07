@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System;
 using System.Collections.Generic;
 
 namespace AnimatedSpriteTest
@@ -10,8 +11,12 @@ namespace AnimatedSpriteTest
 		GraphicsDeviceManager graphics;
 		SpriteBatch spriteBatch;
 
-		private List<Sprite> _sprites;
+		public static Random Random;
 
+		public static int ScreenWidth;
+		public static int ScreenHeight;
+
+		private List<Sprite> _sprites;
 		private Texture2D _texture;
 
 

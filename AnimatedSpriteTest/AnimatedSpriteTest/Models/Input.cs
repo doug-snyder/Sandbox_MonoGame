@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace AnimatedSpriteTest
 {
-	class Input
+	public class Input
 	{
 		public Keys Up { get; set; }
 		public Keys Left { get; set; }
