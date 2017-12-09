@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets
+    xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+	<CodeSnippet Format="1.0.0">
+		<Header>
+			<Title>MonoGame Window in Middle of Screen</Title>
+		</Header>
+		<Snippet>
+			<Code Language="CSharp">
+				<![CDATA[var form = (System.Windows.Forms.Form)System.Windows.Forms.Control.FromHandle(this.Window.Handle);
+			form.Location = new System.Drawing.Point(450, 250);]]>
+			</Code>
+		</Snippet>
+	</CodeSnippet>
+</CodeSnippets>
