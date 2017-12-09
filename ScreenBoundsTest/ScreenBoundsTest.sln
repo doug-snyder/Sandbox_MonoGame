@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26730.15
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScreenBoundsTest", "ScreenBoundsTest\ScreenBoundsTest.csproj", "{40D50F09-B41B-4D34-84C7-4D98ED47E11C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{40D50F09-B41B-4D34-84C7-4D98ED47E11C}.Debug|x86.ActiveCfg = Debug|x86
+		{40D50F09-B41B-4D34-84C7-4D98ED47E11C}.Debug|x86.Build.0 = Debug|x86
+		{40D50F09-B41B-4D34-84C7-4D98ED47E11C}.Release|x86.ActiveCfg = Release|x86
+		{40D50F09-B41B-4D34-84C7-4D98ED47E11C}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {64A3082D-4938-4205-846F-5A233D4B9840}
+	EndGlobalSection
+EndGlobal
